@@ -1,0 +1,64 @@
+name: Performance Test Project CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install locust==2.46.5 SQLAlchemy PyMySQL python-dotenv
+
+      - name: Check Python syntax
+        run: |
+          python -m compileall locustfiles scripts
+
+      - name: Validate basic load test
+        run: |
+          python -m locust -f locustfiles/basic_load_test.py --list
+
+      - name: Validate step load test
+        run: |
+          python -m locust -f locustfiles/step_load_test.py --list
+
+      - name: Validate mixed order test
+        run: |
+          python -m locust -f locustfiles/order_mixed_test.py --list
+
+      - name: Validate peak load test
+        run: |
+          python -m locust -f locustfiles/peak_load_test.py --list
+
+      - name: Validate stability test
+        run: |
+          python -m locust -f locustfiles/stability_test.py --list
+
+      - name: Validate monitoring files
+        run: |
+          test -f monitoring/prometheus/prometheus.yml
+          test -f monitoring/grafana/ecommerce-api-dashboard.json
+
+      - name: Validate documentation
+        run: |
+          test -f README.md
+          test -f docs/test-plan.md
+          test -f docs/performance-report.md
+          test -f docs/issue-report.md
