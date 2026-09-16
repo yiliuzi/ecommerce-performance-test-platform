@@ -85,6 +85,9 @@ QueuePool limit reached, connection timed out
 
 ## 监控指标
 
+![Grafana性能监控面板](docs/images/grafana-dashboard.png)
+
+Grafana Dashboard 包含：
 Grafana Dashboard 包含：
 
 - 实时请求速率
