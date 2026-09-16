@@ -1,5 +1,10 @@
 # Ecommerce Performance Test Platform
 
+[![Performance Test Project CI](https://github.com/yiliuzi/ecommerce-performance-test-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/yiliuzi/ecommerce-performance-test-platform/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Locust](https://img.shields.io/badge/Locust-2.46-green)
+![Prometheus](https://img.shields.io/badge/Monitoring-Prometheus-orange)
+![Grafana](https://img.shields.io/badge/Dashboard-Grafana-orange)
 基于 Locust、Prometheus 和 Grafana 搭建的电商接口性能测试平台，对商品查询、健康检查和订单创建等接口执行基准、阶梯、混合、峰值及稳定性测试，并通过监控数据定位数据库连接池瓶颈。
 
 ## 技术栈
